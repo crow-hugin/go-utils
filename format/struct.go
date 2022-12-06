@@ -21,10 +21,19 @@ func StructToMap(obj interface{}, ignore bool) map[string]interface{} {
 	v := reflect.ValueOf(obj)
 	var ret = make(map[string]interface{})
 	for i := 0; i < t.NumField(); i++ {
-		if ignore && (v.Field(i).IsValid() || v.Field(i).IsNil() || v.Field(i).IsZero()) {
+		fieldV := v.Field(i)
+		if ignore && (fieldV.IsValid() || fieldV.IsNil() || fieldV.IsZero()) {
 			continue
 		}
-		ret[t.Field(i).Name] = v.Field(i).Interface()
+		fieldT := t.Field(i)
+		get := fieldT.Tag.Get("json")
+		var tag string
+		if len(get) == 0 {
+			tag = fieldT.Name
+		} else {
+			tag = get
+		}
+		ret[tag] = fieldV.Interface()
 	}
 	return ret
 }
