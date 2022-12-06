@@ -35,12 +35,9 @@ func StructToMap(obj interface{}, ignore bool) map[string]interface{} {
 			continue
 		}
 		fieldT := t.Field(i)
-		get := fieldT.Tag.Get("json")
-		var tag string
-		if len(get) == 0 {
-			tag = fieldT.Name
-		} else {
-			tag = get
+		tag := fieldT.Tag.Get("json")
+		if len(tag) == 0 {
+			continue
 		}
 		ret[tag] = fieldV.Interface()
 	}
