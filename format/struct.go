@@ -31,7 +31,7 @@ func StructToMap(obj interface{}, ignore bool) map[string]interface{} {
 	var ret = make(map[string]interface{})
 	for i := 0; i < t.NumField(); i++ {
 		fieldV := v.Field(i)
-		if ignore && (fieldV.IsValid() || fieldV.IsNil() || fieldV.IsZero()) {
+		if ignore && (!fieldV.IsValid() || fieldV.IsZero()) {
 			continue
 		}
 		fieldT := t.Field(i)
