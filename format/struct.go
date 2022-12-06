@@ -1,6 +1,9 @@
 package format
 
-import "reflect"
+import (
+	"fmt"
+	"reflect"
+)
 
 // ToInterfaceArr 将任意切片转换成interface切片
 func ToInterfaceArr(slice interface{}) []interface{} {
@@ -19,6 +22,12 @@ func ToInterfaceArr(slice interface{}) []interface{} {
 func StructToMap(obj interface{}, ignore bool) map[string]interface{} {
 	t := reflect.TypeOf(obj)
 	v := reflect.ValueOf(obj)
+	if !IsStructPtr(t) {
+		panic(fmt.Sprintf("%v must be  a struct pointer", obj))
+	}
+	t = t.Elem()
+	v = v.Elem()
+
 	var ret = make(map[string]interface{})
 	for i := 0; i < t.NumField(); i++ {
 		fieldV := v.Field(i)
@@ -46,4 +55,8 @@ func StructToFieldSlice(obj interface{}) []string {
 		FieldData = append(FieldData, t.Field(i).Name)
 	}
 	return FieldData
+}
+
+func IsStructPtr(t reflect.Type) bool {
+	return t.Kind() == reflect.Ptr && t.Elem().Kind() == reflect.Struct
 }
