@@ -6,14 +6,16 @@ import (
 	"time"
 )
 
+// StringToInt 字符串转int
 func StringToInt(str string) int {
-	int, err := strconv.Atoi(str)
+	i, err := strconv.Atoi(str)
 	if err != nil {
 		return 0
 	}
-	return int
+	return i
 }
 
+// StringToInt32 字符串转int32
 func StringToInt32(str string) int32 {
 	num, err := strconv.ParseInt(str, 10, 32)
 	if err != nil {
@@ -22,6 +24,7 @@ func StringToInt32(str string) int32 {
 	return int32(num)
 }
 
+// StringToInt64 字符串转int64
 func StringToInt64(str string) int64 {
 	num, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
@@ -30,6 +33,7 @@ func StringToInt64(str string) int64 {
 	return num
 }
 
+// StringToFloat32 字符串转int32
 func StringToFloat32(str string) float32 {
 	num, err := strconv.ParseFloat(str, 32)
 	if err != nil {
@@ -38,6 +42,7 @@ func StringToFloat32(str string) float32 {
 	return float32(num)
 }
 
+// StringToFloat64 字符串转float64
 func StringToFloat64(str string) float64 {
 	num, err := strconv.ParseFloat(str, 64)
 	if err != nil {
@@ -46,7 +51,7 @@ func StringToFloat64(str string) float64 {
 	return num
 }
 
-// 生成随机数
-func GenerateRandom(interval int) int {
+// GenRandom 生成随机数
+func GenRandom(interval int) int {
 	return rand.New(rand.NewSource(time.Now().UnixNano())).Intn(interval)
 }
