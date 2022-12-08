@@ -36,6 +36,12 @@ func GetNowDate() string {
 	return t
 }
 
+func GetUnixDateTimestamp(timestamp int64) int64 {
+	var dateTime = time.Unix(timestamp, 0)
+	tm := time.Date(dateTime.Year(), dateTime.Month(), dateTime.Day(), 0, 0, 0, 0, dateTime.Location())
+	return tm.UnixMilli()
+}
+
 // GetNowHourUnix 获取当前小时时间
 func GetNowHourUnix() int64 {
 	now := time.Now()
