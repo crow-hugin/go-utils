@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const Key = "crow-hugin@1688"
+const Key = "crow_hugin@16888"
 
 func EncryptToken(s string) string {
 	result, err := AesEncrypt([]byte(s), []byte(Key))
