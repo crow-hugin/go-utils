@@ -1,4 +1,4 @@
-module github.com/crow-hugin/go-utils
+module github.com/crow-hugin/go-utils/secret
 
 go 1.17
 
