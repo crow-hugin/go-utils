@@ -41,5 +41,9 @@ func PKCS5Padding(ciphertext []byte, blockSize int) []byte {
 
 func PKCS5UnPadding(origData []byte) []byte {
 	length := len(origData)
-	return origData[:(len(origData) - int(origData[length-1]))]
+	unPadding := int(origData[length-1])
+	if unPadding > length {
+		return nil
+	}
+	return origData[:(length - unPadding)]
 }

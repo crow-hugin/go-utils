@@ -28,7 +28,6 @@ func DecryptToken(s string) string {
 	if err != nil {
 		return ""
 	}
-
 	result, err := AesDecrypt(ss, []byte(Key))
 	if err != nil {
 		return ""
